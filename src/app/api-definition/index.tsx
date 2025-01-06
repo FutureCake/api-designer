@@ -1,21 +1,30 @@
+import { APIDefinition, useAPIStore } from "../../datastore";
 import APIEndpoints from "./api-endpoints";
 import EndpointModifiersRegister from "./endpoint-modifiers-register";
 
-interface APIDefinitionProps {
-    name: string
+export interface APIDefinitionProps {
+    index: number;
+    definition: APIDefinition;
 }
 
-export default function APIDefinition(props: APIDefinitionProps) {
+export default function API(props: APIDefinitionProps) {
 
-    const { name } = props
+    const { index, definition } = props
+
+    const remove = useAPIStore((state) => state.removeAPIDefinition)
+
+    const del = () => {
+        remove(index)
+    }
 
     return (
         <div>
-            <input type="text" name="api-name" id="api-name" value={name} />
+            <input type="text" name="api-name" id="api-name" value={definition.name} />
+            <button onClick={del}>Delete</button>
 
             <EndpointModifiersRegister />
 
-            <input type="text" name="base-url" id="base-url" value={"http://127.0.0.1:3000/"} />
+            <input type="text" name="base-url" id="base-url" value={definition.baseUrl} />
 
             <APIEndpoints />
         </div>

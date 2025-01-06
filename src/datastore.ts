@@ -33,6 +33,7 @@ export interface APIDefinition {
 export interface APIStore {
     apiDefinitions: APIDefinition[];
     addAPIDefinition: (newDefinition: string) => void;
+    removeAPIDefinition: (index: number) => void;
 }
 
 export const useAPIStore = create<APIStore>()(
@@ -48,6 +49,11 @@ export const useAPIStore = create<APIStore>()(
                 }
                 set({ apiDefinitions: [definition, ...get().apiDefinitions] })
             },
+            removeAPIDefinition: (index: number) => {
+                const definitions = get().apiDefinitions;
+                const updatedDefinitions = definitions.filter((_, i) => i !== index)
+                set({ apiDefinitions: updatedDefinitions })
+            }
         }),
         {
             name: 'food-storage', // name of the item in the storage (must be unique)
