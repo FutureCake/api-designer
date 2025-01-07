@@ -1,0 +1,34 @@
+.modifier-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.identifier-container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto auto;
+}
+
+.identifier {
+    box-sizing: content-box;
+    width: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 2px 7px;
+}
+
+.identifier-color {
+    margin-left: 2px;
+    height: 100%;
+    aspect-ratio: 1;
+    background: #f0c;
+    flex-shrink: 0;
+    flex-basis: auto;
+}
+
+.modifier-description {
+    margin-left: 10px;
+    flex: 1;
+}

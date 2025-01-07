@@ -22,7 +22,7 @@ export default function API(props: APIDefinitionProps) {
             <input type="text" name="api-name" id="api-name" value={definition.name} />
             <button onClick={del}>Delete</button>
 
-            <EndpointModifiersRegister />
+            <EndpointModifiersRegister index={index} />
 
             <input type="text" name="base-url" id="base-url" value={definition.baseUrl} />
 
