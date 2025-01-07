@@ -34,6 +34,9 @@ export interface APIStore {
     apiDefinitions: APIDefinition[];
     addAPIDefinition: (newDefinition: string) => void;
     removeAPIDefinition: (index: number) => void;
+    addEndpointModifier: (apiIndex: number, identifier: string, color: string, description: string) => void;
+    getEndpointModifiers: (apiIndex: number) => EndpointModifier[]
+    removeEndpointModifier: (apiIndex: number, modifierIndex: number) => void;
 }
 
 export const useAPIStore = create<APIStore>()(
@@ -53,6 +56,29 @@ export const useAPIStore = create<APIStore>()(
                 const definitions = get().apiDefinitions;
                 const updatedDefinitions = definitions.filter((_, i) => i !== index)
                 set({ apiDefinitions: updatedDefinitions })
+            },
+            addEndpointModifier: (apiIndex: number, identifier: string, color: string, description: string) => {
+
+                const apis = get().apiDefinitions;
+                set({
+                    apiDefinitions: apis.map((api, index): APIDefinition => {
+                        return index === apiIndex ? {
+                            ...api,
+                            endpointModifiers: [...api.endpointModifiers, {
+                                label: identifier,
+                                color: color,
+                                description: description
+                            }]
+                        } : api;
+                    })
+                });
+
+            },
+            getEndpointModifiers: (apiIndex: number) => {
+                return get().apiDefinitions[apiIndex].endpointModifiers;
+            },
+            removeEndpointModifier: (apiIndex: number, modifierIndex: number) => {
+
             }
         }),
         {
