@@ -19,14 +19,14 @@ export default function API(props: APIDefinitionProps) {
 
     return (
         <div>
-            <input type="text" name="api-name" id="api-name" value={definition.name} />
+            <input type="text" name="api-name" id="api-name" value={definition.name} onChange={() => { }} />
             <button onClick={del}>Delete</button>
 
             <EndpointModifiersRegister index={index} />
 
-            <input type="text" name="base-url" id="base-url" value={definition.baseUrl} />
+            <h2 className="section-title">Base url: &nbsp;</h2><input type="text" name="base-url" id="base-url" value={definition.baseUrl} onChange={() => { }} />
 
-            <APIEndpoints />
+            <APIEndpoints index={index} />
         </div>
     )
 }

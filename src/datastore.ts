@@ -5,6 +5,7 @@ export type EndpointType = "POST" | "PUT" | "PATCH" | "GET" | "DELETE";
 
 export interface Endpoint {
     name: string;
+    modifiers: EndpointModifier[];
     type: EndpointType;
     url: string;
     requestData: object;
@@ -37,6 +38,7 @@ export interface APIStore {
     addEndpointModifier: (apiIndex: number, identifier: string, color: string, description: string) => void;
     getEndpointModifiers: (apiIndex: number) => EndpointModifier[]
     removeEndpointModifier: (apiIndex: number, modifierIndex: number) => void;
+    addEndpoint: (apiIndex: number, endpoint: Endpoint | EndpointsGroup) => void;
 }
 
 export const useAPIStore = create<APIStore>()(
@@ -79,6 +81,17 @@ export const useAPIStore = create<APIStore>()(
             },
             removeEndpointModifier: (apiIndex: number, modifierIndex: number) => {
 
+            },
+            addEndpoint: (apiIndex: number, endpoint: Endpoint | EndpointsGroup) => {
+                const apis = get().apiDefinitions;
+                set({
+                    apiDefinitions: apis.map((api, index): APIDefinition => {
+                        return index === apiIndex ? {
+                            ...api,
+                            endpoints: [endpoint, ...api.endpoints]
+                        } : api;
+                    })
+                })
             }
         }),
         {

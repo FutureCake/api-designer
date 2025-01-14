@@ -17,6 +17,7 @@ function App() {
 
             <button id='new-api' onClick={add}>New API definition</button>
 
+            <div id='apis'></div>
             {
                 apis.map((api, index) => {
                     return <API definition={api} key={index} index={index} />

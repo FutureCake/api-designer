@@ -20,7 +20,8 @@ export default function EndpointModifiersRegister(props: EndpointModifiersRegist
 
     return (
         <div id='endpoint-modifiers-container'>
-            <h2 className="section-title" id='modifiers-title'>API endpoint specific information register</h2>
+            <h2 className="section-title" id='modifiers-title'>API endpoint specific modifications register</h2>
+            <button onClick={add}>New modifier</button>
             <div id="modifiers">
                 {
                     modifiers.map((_, index) => {
@@ -29,7 +30,7 @@ export default function EndpointModifiersRegister(props: EndpointModifiersRegist
                 }
 
             </div>
-            <button onClick={add}>New modifier</button>
+
         </div>
 
     )
